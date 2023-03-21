@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
 
-import { HttpClientModule } from '@angular/common/http';
-import { booksReducer } from './state/books.reducer';
-import { collectionReducer } from './state/collection.reducer';
-import { StoreModule } from '@ngrx/store';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { BookListComponent } from './book-list/book-list.component';
-import { BookCollectionComponent } from './book-collection/book-collection.component';
-import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { booksReducer } from './state/reducers/books.reducer';
+import { HttpClientModule } from '@angular/common/http';
+import { collectionReducer } from './state/reducers/collection.reducer';
+import { combinedReducers } from './state/combine.reducers';
 
 @NgModule({
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }),
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    StoreModule.forRoot(combinedReducers),
     HttpClientModule,
-    IonicModule.forRoot(), AppRoutingModule
   ],
-  declarations: [AppComponent, BookListComponent, BookCollectionComponent],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

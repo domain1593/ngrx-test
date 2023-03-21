@@ -1,0 +1,17 @@
+<ion-grid class="steps-header__container">
+  <ion-col class="steps-header__container-col">
+    <ng-container *ngFor="let pageItem of setComponentRoute; let i = index">
+      <ion-row *ngIf="pageItem.active; else showInactive" class="steps-header__row-check-style">
+        <ion-icon name="checkmark-circle-outline" class="steps-header__check-icon-activated"></ion-icon>
+      </ion-row>
+      <ng-template #showInactive>
+        <ion-row class="steps-header__row-check-style">
+          <ion-icon name="ellipse-outline" class="steps-header__check-icon-desactivated"></ion-icon>
+        </ion-row>
+      </ng-template>
+      <ion-row *ngIf=" i < setComponentRoute.length - 1" class="steps-header__row-dash-symbol-style">
+        -
+      </ion-row>
+    </ng-container>
+  </ion-col>
+</ion-grid>

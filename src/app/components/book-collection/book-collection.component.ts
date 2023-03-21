@@ -7,7 +7,7 @@ import { Book } from '../book-list/books.model';
   styleUrls: ['./book-collection.component.css'],
 })
 export class BookCollectionComponent {
-  @Input() books: ReadonlyArray<Book> = [];
+  @Input() books: Array<Book> = [];
   @Output() remove = new EventEmitter<string>();
 }
 
